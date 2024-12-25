@@ -1,17 +1,17 @@
 **Optimización por Ratios de Probabilidad de Preferencias (ORPO)**
 
-ORPO (Odds Ratio Preference Optimization) es una técnica novedosa de ajuste fino que combina el ajuste fino y la alineación de preferencias en un único proceso unificado. Este enfoque combinado ofrece ventajas en términos de eficiencia y rendimiento en comparación con métodos tradicionales como RLHF o DPO.
+ORPO (Odds Ratio Preference Optimization) es una técnica novedosa de fine-tuning que combina el fine-tuning y la alineación de preferencias en un único proceso unificado. Este enfoque combinado ofrece ventajas en términos de eficiencia y rendimiento en comparación con métodos tradicionales como RLHF o DPO.
 
 ## Entendiendo ORPO
 
-Los métodos de alineación como DPO suelen involucrar dos pasos separados: ajuste fino supervisado para adaptar el modelo a un dominio y formato, seguido de la alineación de preferencias para alinearse con las preferencias humanas. Mientras que el ajuste fino supervisado (SFT) adapta eficazmente los modelos a los dominios objetivo, puede aumentar inadvertidamente la probabilidad de generar tanto respuestas deseables como indeseables. ORPO aborda esta limitación integrando ambos pasos en un solo proceso, como se ilustra en la siguiente comparación:
+Los métodos de alineación como DPO suelen involucrar dos pasos separados: fine-tuning supervisado para adaptar el modelo a un dominio y formato, seguido de la alineación de preferencias para alinearse con las preferencias humanas. Mientras que el fine-tuning fino supervisado (SFT) adapta eficazmente los modelos a los dominios objetivo, puede aumentar inadvertidamente la probabilidad de generar tanto respuestas deseables como indeseables. ORPO aborda esta limitación integrando ambos pasos en un solo proceso, como se ilustra en la siguiente comparación:
 
 ![Comparación de Técnicas de Alineación](https://argilla.io/images/blog/mantisnlp-rlhf/part-8-alignments.png)
 *Comparación de diferentes técnicas de alineación de modelos*
 
 ## Cómo Funciona ORPO
 
-El proceso de entrenamiento de ORPO utiliza un conjunto de datos de preferencias similar al que usamos para DPO, donde cada ejemplo de entrenamiento contiene un prompt de entrada junto con dos respuestas: una preferida y otra rechazada. A diferencia de otros métodos de alineación que requieren etapas separadas y modelos de referencia, ORPO integra la alineación de preferencias directamente en el proceso de ajuste fino supervisado. Este enfoque monolítico lo hace libre de modelos de referencia, computacionalmente más eficiente y eficiente en memoria, con menos FLOPs.
+El proceso de entrenamiento de ORPO utiliza un conjunto de datos de preferencias similar al que usamos para DPO, donde cada ejemplo de entrenamiento contiene un prompt de entrada junto con dos respuestas: una preferida y otra rechazada. A diferencia de otros métodos de alineación que requieren etapas separadas y modelos de referencia, ORPO integra la alineación de preferencias directamente en el proceso de fine-tuning supervisado. Este enfoque monolítico lo hace libre de modelos de referencia, computacionalmente más eficiente y eficiente en memoria, con menos FLOPs.
 
 ORPO crea un nuevo objetivo combinando dos componentes principales:
 
@@ -19,7 +19,7 @@ ORPO crea un nuevo objetivo combinando dos componentes principales:
 
 2. **Pérdida de Odds Ratio**: Un componente novedoso que penaliza respuestas no deseadas mientras recompensa las preferidas. Esta función de pérdida utiliza odds ratios para contrastar eficazmente entre respuestas favorecidas y desfavorecidas a nivel de token.
 
-Juntos, estos componentes guían al modelo para adaptarse a las generaciones deseadas para el dominio específico mientras desalienta activamente las generaciones del conjunto de respuestas rechazadas. El mecanismo de odds ratio proporciona una manera natural de medir y optimizar las preferencias del modelo entre respuestas elegidas y rechazadas. Si deseas profundizar en las matemáticas, puedes leer el [artículo de ORPO](https://arxiv.org/abs/2402.01714). Si deseas aprender sobre ORPO desde la perspectiva de implementación, puedes revisar cómo se calcula la pérdida de ORPO en la [biblioteca TRL](https://github.com/huggingface/trl/blob/b02189aaa538f3a95f6abb0ab46c0a971bfde57e/trl/trainer/orpo_trainer.py#L660).
+Juntos, estos componentes guían al modelo para adaptarse a las generaciones deseadas para el dominio específico mientras desalienta activamente las generaciones del conjunto de respuestas rechazadas. El mecanismo de odds ratio proporciona una manera natural de medir y optimizar las preferencias del modelo entre respuestas elegidas y rechazadas. Si deseas profundizar en las matemáticas, puedes leer el [artículo de ORPO](https://arxiv.org/abs/2403.07691). Si deseas aprender sobre ORPO desde la perspectiva de implementación, puedes revisar cómo se calcula la pérdida de ORPO en la [biblioteca TRL](https://github.com/huggingface/trl/blob/b02189aaa538f3a95f6abb0ab46c0a971bfde57e/trl/trainer/orpo_trainer.py#L660).
 
 ## Rendimiento y Resultados
 
@@ -79,6 +79,6 @@ Parámetros clave a considerar:
 ⏩ Prueba el [Tutorial de ORPO](./notebooks/orpo_tutorial.ipynb) para implementar este enfoque unificado de alineación de preferencias.
 
 ## Recursos
-- [Artículo de ORPO](https://arxiv.org/abs/2402.01714)
+- [Artículo de ORPO](https://arxiv.org/abs/2403.07691)
 - [Documentación de TRL](https://huggingface.co/docs/trl/index)
 - [Guía de RLHF de Argilla](https://argilla.io/blog/mantisnlp-rlhf-part-8/)

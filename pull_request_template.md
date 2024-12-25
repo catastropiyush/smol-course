@@ -18,7 +18,7 @@ Describe what you've done in this PR:
 
 ## Notebooks Added/Modified
 List any notebooks you've added or modified:
-- [ ] Added new example in `module_name/students/my_example.ipynb`
+- [ ] Added new example in `module_name/student_examples/my_example.ipynb`
 - [ ] Modified existing notebook with additional examples
 - [ ] Added documentation or comments
 
@@ -27,7 +27,7 @@ List any notebooks you've added or modified:
 - [ ] I have read the module materials
 - [ ] My code runs without errors
 - [ ] I have pushed models and datasets to the huggingface hub
-- [ ] My PR is based on the `december_2024` branch
+- [ ] My PR is based on the `december-2024` branch
 
 ## Questions or Discussion Points
 Add any questions you have or points you'd like to discuss:
